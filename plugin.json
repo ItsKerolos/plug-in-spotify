@@ -1,0 +1,7 @@
+{
+  "execute": "sh",
+  "main": "main.sh",
+  "interval": 1500,
+  "alignment": "left",
+  "priority": 1
+}
