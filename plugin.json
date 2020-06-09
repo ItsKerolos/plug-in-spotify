@@ -1,4 +1,5 @@
 {
+  "greetings": true,
   "execute": "sh",
   "main": "main.sh",
   "interval": 1500,
