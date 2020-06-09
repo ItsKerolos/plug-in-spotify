@@ -46,8 +46,13 @@ fi
 
 # TITLE FORMAT
 
-if [[ -z "$SONG_TITLE" ]]; then
-  TITLE="$GREET"
+if [[ -z "$SONG_TITLE" && -z "$SONG_ARTIST" ]]; then
+  if [[ "$PL_CONFIG_GREETINGS" == true ]]; then
+    TITLE="$GREET"
+  else
+    TITLE=""
+  fi
+# Ads
 elif [[ -z "$SONG_ARTIST" ]]; then
   TITLE="$SONG_TITLE"
 else
