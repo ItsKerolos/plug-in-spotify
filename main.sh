@@ -9,15 +9,12 @@ PLAY_PAUSE="$COMMAND_BASE play-pause"
 NEXT="$COMMAND_BASE next"
 PREVIOUS="$COMMAND_BASE previous"
 
-COPY_URL="echo $SONG_URL \| xclip -sel clip"
-COPY_NOTIFY="notify-send 'Spotify' 'Copied track url to clipboard.'"
-
 # ART IMAGE
 
-ART_ID=$($COMMAND_BASE metadata mpris:artUrl)
-ART_ID="${ART_ID/'https://open.spotify.com/image/'/''}"
+ART_URL=$($COMMAND_BASE metadata mpris:artUrl)
 
-ART_URL="https://i.scdn.co/image/$ART_ID"
+# workaround spotify mpris support being outdated
+ART_URL="${ART_URL/'https://open.spotify.com/'/'https://i.scdn.co/'}"
 
 # GREET FORMAT
 
@@ -65,7 +62,7 @@ echo "$TITLE"
 
 # if spotify is running
 if [ "$TITLE" != "$GREET" ]; then
-  echo "<b>$SONG_ARTIST</b>\n$SONG_TITLE | image({ url($ART_URL), width(56), height(56) }) | press($COPY_URL && $COPY_NOTIFY)"
+  echo "<b>$SONG_ARTIST</b>\n$SONG_TITLE | image({ url($ART_URL), width(56), height(56) }) | clipboard($SONG_URL) | notify({ title(Spotify), message(Copied track url to clipboard.) })"
   echo " | "
   echo "$STATE | press($PLAY_PAUSE)"
   echo " | "
