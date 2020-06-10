@@ -49,7 +49,7 @@ if [[ -z "$SONG_TITLE" && -z "$SONG_ARTIST" ]]; then
   else
     TITLE=""
   fi
-# Ads
+# Advertisements
 elif [[ -z "$SONG_ARTIST" ]]; then
   TITLE="$SONG_TITLE"
 else
@@ -61,13 +61,16 @@ fi
 echo "$TITLE"
 
 # if spotify is running
-if [ "$TITLE" != "$GREET" ]; then
+if [ "$TITLE" == "$GREET" ]; then
+  echo "Launch | press(spotify)"
+# if an advertisement is playing
+elif [ "$TITLE" == "$SONG_TITLE" ]; then
+  echo "$STATE | press($PLAY_PAUSE)"
+else
   echo "<b>$SONG_ARTIST</b>\n$SONG_TITLE | image({ url($ART_URL), width(56), height(56) }) | clipboard($SONG_URL) | notify({ title(Spotify), message(Copied track url to clipboard.) })"
   echo " | "
   echo "$STATE | press($PLAY_PAUSE)"
   echo " | "
   echo "Next | press($NEXT)"
   echo "Previous | press($PREVIOUS)"
-else
-  echo "Launch | press(spotify)"
 fi
